@@ -10,7 +10,7 @@ word = ''
 
 
 def hangman(file):
-    displayWord(randomWord())
+    randomWord()
     guessLetter()
 
 
@@ -40,20 +40,20 @@ def randomWord(difficulty=int(input('Enter the max length of word you would like
 def guessLetter(guess=input(f"Guess a letter! --> ")):
     guess = guess.upper()
     if guess in alreadyGuessed:
-        print(alreadyGuessed)
         print(
-            "You have already guessed that letter =) Try a different one!")
+            f"You've already guessed these letters: {printGuessedLetters(alreadyGuessed)} -- Try a different one!")
         guessLetter(guess=input(f"Guess a letter! --> "))
 
     else:
         alreadyGuessed.append(guess)
         if guess in letterList:
-            print("That's a letter!")
+            # print("That's a letter!")
             ind = [i for i in range(len(letterList)) if letterList[i] == guess]
             for i in ind:
                 letterDict[i] = True
             displayWord(word)
             if checkIfWonOrLost():
+                print("======== Congratulations! You won! ========")
                 return
             else:
                 guessLetter(guess=input(f"Guess a letter! --> "))
@@ -67,7 +67,12 @@ def guessLetter(guess=input(f"Guess a letter! --> ")):
             displayWord(word)
             guessLetter(guess=input(f"Guess a letter! --> "))
 
-        # print(f"letterDict: {letterDict}")
+
+def printGuessedLetters(ls):
+    result = ''
+    for i in range(len(ls)):
+        result += alreadyGuessed[i] + ' '
+    return result
 
 # if input in alreadyGuessed, let user know
 # else alreadyGuessed.append(input)
@@ -90,7 +95,7 @@ def letterOrDash(word):
 
 
 def displayWord(word):
-    print(f"So far you've got: {letterOrDash(word)}")
+    print(f"So far: {letterOrDash(word)}")
     checkIfWonOrLost()
 
     # display should be run after each guess is computed
@@ -101,11 +106,11 @@ def displayWord(word):
 
 def checkIfWonOrLost():
     if all(letterDict.values()):
-        print("======== Congratulations! You won! ========")
         return True
     else:
         if wrongGuessCount == 0:
             print("Oh no =( You lost.")
+
 
         #
         #
