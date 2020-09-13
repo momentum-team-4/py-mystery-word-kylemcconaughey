@@ -64,24 +64,31 @@ def displayWord(word):
     # ask if they want to play again - if so, reset wrongGuessCount, alreadyGuessed, wordObject, wordList, etc.
 
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+def checkIfWonOrLost():
+    if all(letterDict.values()):
+        print("Congratulations! You won!")
+    else:
+        if wrongGuessCount == 0:
+            print("Oh no =( You lost.")
+
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
 if __name__ == "__main__":
     import argparse
     from pathlib import Path
