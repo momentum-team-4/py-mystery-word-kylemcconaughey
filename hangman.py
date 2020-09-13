@@ -1,4 +1,5 @@
 import random
+import os
 
 wrongGuessCount = 8
 
@@ -11,6 +12,7 @@ word = ''
 
 def hangman(file):
     randomWord()
+    print(f"Your word has {len(word)} letters in it! Good luck =)")
     guessLetter()
 
 
@@ -32,22 +34,35 @@ def randomWord(difficulty=int(input('Enter the max length of word you would like
         letterDict[i] = False
     # print(f'letterList: {letterList}')
     # print(f"letterDict: {letterDict}")
+    # print(f"Your word has {len(word)} letters in it! Good luck =)")
     return word
 
 
 # input = input.upper(), if isalpha().len(1)
+# def userInput(guess=input(f"Guess a letter! --> ")):
+#     if not guess.isalpha():
+#         guess = input(f"Guess a LETTER! --> ")
+#     else:
+#         if len(guess) > 1:
+#             guess = input(f"Guess A (single) letter! --> ")
+#     return guess
+
 
 def guessLetter(guess=input(f"Guess a letter! --> ")):
+    if not guess.isalpha():
+        guess = input(f"Guess a LETTER! --> ")
+    else:
+        if len(guess) > 1:
+            guess = input(f"Guess A (single) letter! --> ")
     guess = guess.upper()
     if guess in alreadyGuessed:
         print(
-            f"You've already guessed these letters: {printGuessedLetters(alreadyGuessed)} -- Try a different one!")
+            f"You've already guessed these: {printGuessedLetters(alreadyGuessed)} -- Try a different one!")
         guessLetter(guess=input(f"Guess a letter! --> "))
 
     else:
         alreadyGuessed.append(guess)
         if guess in letterList:
-            # print("That's a letter!")
             ind = [i for i in range(len(letterList)) if letterList[i] == guess]
             for i in ind:
                 letterDict[i] = True
@@ -56,16 +71,19 @@ def guessLetter(guess=input(f"Guess a letter! --> ")):
                 print("======== Congratulations! You won! ========")
                 return
             else:
-                guessLetter(guess=input(f"Guess a letter! --> "))
+                guessLetter(guess=input(
+                    f"Good job! Guess another letter! --> "))
         else:
             global wrongGuessCount
             wrongGuessCount -= 1
-            print(f"Wrong guesses left: {wrongGuessCount}")
+            displayWord(word)
             if wrongGuessCount == 0:
                 checkIfWonOrLost()
                 return
-            displayWord(word)
-            guessLetter(guess=input(f"Guess a letter! --> "))
+            print(
+                f"You've got {wrongGuessCount} guesses left. Make 'em count!")
+            guessLetter(guess=input(
+                f"Guess another letter! --> "))
 
 
 def printGuessedLetters(ls):
@@ -83,7 +101,7 @@ def printGuessedLetters(ls):
 
 
 def letterOrDash(word):
-    print(f"Word: {word}")
+    print(f"(Word: {word})")
     soFar = ''
     for i in range(len(word)):
         # print(i)
@@ -95,6 +113,7 @@ def letterOrDash(word):
 
 
 def displayWord(word):
+    os.system('clear')
     print(f"So far: {letterOrDash(word)}")
     checkIfWonOrLost()
 
@@ -110,7 +129,6 @@ def checkIfWonOrLost():
     else:
         if wrongGuessCount == 0:
             print("Oh no =( You lost.")
-
 
         #
         #
