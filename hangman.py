@@ -11,6 +11,7 @@ word = ''
 
 def hangman(file):
     displayWord(randomWord())
+    guessLetter()
 
 
 # def open words.txt, read them into blob
@@ -29,12 +30,44 @@ def randomWord(difficulty=int(input('Enter the max length of word you would like
     global letterDict
     for i in range(len(word)):
         letterDict[i] = False
-    print(f'letterList: {letterList}')
-    print(f"letterDict: {letterDict}")
+    # print(f'letterList: {letterList}')
+    # print(f"letterDict: {letterDict}")
     return word
 
 
 # input = input.upper(), if isalpha().len(1)
+
+def guessLetter(guess=input(f"Guess a letter! --> ")):
+    guess = guess.upper()
+    if guess in alreadyGuessed:
+        print(alreadyGuessed)
+        print(
+            "You have already guessed that letter =) Try a different one!")
+        guessLetter(guess=input(f"Guess a letter! --> "))
+
+    else:
+        alreadyGuessed.append(guess)
+        if guess in letterList:
+            print("That's a letter!")
+            ind = [i for i in range(len(letterList)) if letterList[i] == guess]
+            for i in ind:
+                letterDict[i] = True
+            displayWord(word)
+            if checkIfWonOrLost():
+                return
+            else:
+                guessLetter(guess=input(f"Guess a letter! --> "))
+        else:
+            global wrongGuessCount
+            wrongGuessCount -= 1
+            print(f"Wrong guesses left: {wrongGuessCount}")
+            if wrongGuessCount == 0:
+                checkIfWonOrLost()
+                return
+            displayWord(word)
+            guessLetter(guess=input(f"Guess a letter! --> "))
+
+        # print(f"letterDict: {letterDict}")
 
 # if input in alreadyGuessed, let user know
 # else alreadyGuessed.append(input)
@@ -43,11 +76,12 @@ def randomWord(difficulty=int(input('Enter the max length of word you would like
 
 # display function should loop through each letter in the list, and check the object. if true (guessed correctly) display the letter, if false (not yet guessed) display '_' in its place
 
+
 def letterOrDash(word):
-    print(f"47 lOD word: {word}")
+    print(f"Word: {word}")
     soFar = ''
     for i in range(len(word)):
-        print(i)
+        # print(i)
         if letterDict[i]:
             soFar += letterList[i] + ' '
         else:
@@ -56,7 +90,8 @@ def letterOrDash(word):
 
 
 def displayWord(word):
-    print(f"l57 So far you've got: {letterOrDash(word)}")
+    print(f"So far you've got: {letterOrDash(word)}")
+    checkIfWonOrLost()
 
     # display should be run after each guess is computed
 
@@ -66,7 +101,8 @@ def displayWord(word):
 
 def checkIfWonOrLost():
     if all(letterDict.values()):
-        print("Congratulations! You won!")
+        print("======== Congratulations! You won! ========")
+        return True
     else:
         if wrongGuessCount == 0:
             print("Oh no =( You lost.")
