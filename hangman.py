@@ -54,12 +54,7 @@ def randomWord(difficulty=int(input('Enter the difficulty you would like... 1, 2
     return word
 
 
-firstDisplay = word
-firstDisplay += ' len(word): '
-firstDisplay += str(len(word))
-
-
-def guessLetter(guess=input(firstDisplay)):
+def guessLetter(guess=input("Guess a letter! --> ")):
     global wrongGuessCount
     if all(letterDict.values()) or wrongGuessCount == 0:
         checkIfWonOrLost()
@@ -145,7 +140,6 @@ def checkIfWonOrLost():
         if wrongGuessCount == 0:
             print(
                 f"Oh no! You lost =( The word was: {word}. Better luck next time.")
-
 
         #
         #
