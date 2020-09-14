@@ -1,7 +1,7 @@
 import random
 import os
 from hanged import hanged
-with open('words.txt') as infile:
+with open('words.txt', 'rt') as infile:
     blob = infile.read().upper().split()
 level1 = [x for x in blob if len(x) >= 3 and len(x) <= 5]
 level2 = [x for x in blob if len(x) >= 6 and len(x) <= 8]
@@ -83,7 +83,7 @@ def letterOrDash(word):
 def displayWord(word):
     os.system('clear')
     print(
-        f"So far, you've got {letterOrDash(word)} and have guessed {', '.join(x for x in guessed)}")
+        f"So far, you've got {letterOrDash(word)} and have guessed these letters: {', '.join(x for x in guessed)}")
     global wrongGuesses
     hanged(wrongGuesses)
 
