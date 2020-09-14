@@ -1,3 +1,5 @@
+# TO PLAY, PLEASE ENSURE YOU'RE IN THIS DIRECTORY IN COMMAND LINE, AND ENTER 'python3 hangme.py'
+import math
 import random
 import os
 from hanged import hanged
@@ -5,7 +7,8 @@ with open('words.txt', 'rt') as infile:
     blob = infile.read().upper().split()
 level1 = [x for x in blob if len(x) >= 3 and len(x) <= 5]
 level2 = [x for x in blob if len(x) >= 6 and len(x) <= 8]
-level3 = [x for x in blob if len(x) >= 8 and len(x) <= 20]
+level3 = [x for x in blob if len(x) >= 8 and len(x) <= math.inf]
+level4 = [x for x in blob if len(x) > 15 and len(x) < math.inf]
 level0 = [x for x in blob if len(x) < 4]
 guessed = []
 wrongGuesses = 8
@@ -19,12 +22,11 @@ def selectDifficulty():
         "Choose difficulty... 1 (for easy), 2 (for medium), or 3 (for hard): ")
 
     while True:
-        if difficulty in ['1', '2', '3', '0']:
+        if difficulty in ['1', '2', '3', '0', '4']:
             word = random.choice(eval('level' + difficulty))
             break
         else:
             difficulty = input("Please choose between only 1, 2, and 3: ")
-
     # print(f"(Word: {word})")
     print(f"Your word has {len(word)} letters in it. Good luck!")
     return word
