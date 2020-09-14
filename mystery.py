@@ -87,7 +87,7 @@ def displayWord(word):
     print(
         f"So far, you've got {letterOrDash(word)} and have guessed these letters: {', '.join(x for x in guessed)}")
     global wrongGuesses
-    hanged(wrongGuesses)
+    drawn(wrongGuesses)
 
 
 def playGame(wrongGuesses, word):
