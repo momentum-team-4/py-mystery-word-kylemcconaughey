@@ -27,11 +27,7 @@ def playAgain():
     hangman(file)
 
 
-# def open words.txt, read them into blob
-# def select random word - must take difficulty input
 def randomWord(difficulty=int(input('Enter the difficulty you would like... 1, 2, or 3: '))):
-    # with open(file, 'rt') as infile:
-    #     blob = infile.read()
     blob = file.read()
 
     if difficulty == 1:
@@ -88,10 +84,6 @@ def guessLetter(guess=input("Guess a letter! --> ")):
                 wrongGuessCount -= 1
                 displayWord(word)
                 if wrongGuessCount > 0:
-                    # print(
-                    #     f"Oh no! You lost =( The word was: {word}. Better luck next time.")
-                    #     checkIfWonOrLost()
-                    # else:
                     print(
                         f"Whoops, '{guess}' wasn't in the word. You've got {wrongGuessCount} guesses left. Make 'em count!")
                     guessLetter(guess=input(
@@ -103,13 +95,6 @@ def printGuessedLetters(ls):
     for i in range(len(ls)):
         result += alreadyGuessed[i] + ' '
     return result
-
-# if input in alreadyGuessed, let user know
-# else alreadyGuessed.append(input)
-
-# if guess is wrong, wrongGuessCount -= 1, display to user
-
-# display function should loop through each letter in the list, and check the object. if true (guessed correctly) display the letter, if false (not yet guessed) display '_' in its place
 
 
 def letterOrDash(word):
@@ -129,11 +114,6 @@ def displayWord(word):
     print(f"So far: {letterOrDash(word)}")
     checkIfWonOrLost()
 
-    # display should be run after each guess is computed
-
-    # each time display is run, checkIfWonOrLost() should be run - if False not in wordObject keys, player has won. Otherwise check if wrongGuessCount = 0, in which case player has lost. Else, guess again.
-    # ask if they want to play again - if so, reset wrongGuessCount, alreadyGuessed, wordObject, wordList, etc.
-
 
 def checkIfWonOrLost():
     if all(letterDict.values()):
@@ -143,23 +123,6 @@ def checkIfWonOrLost():
             print(
                 f"Oh no! You lost =( The word was: {word}. Better luck next time.")
 
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
+
 if __name__ == "__main__":
     hangman(file)

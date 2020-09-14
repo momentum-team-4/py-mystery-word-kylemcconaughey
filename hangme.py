@@ -2,7 +2,7 @@ import random
 import os
 with open('words.txt') as infile:
     blob = infile.read().upper().split()
-level1 = [x for x in blob if len(x) >= 4 and len(x) <= 6]
+level1 = [x for x in blob if len(x) >= 3 and len(x) <= 5]
 level2 = [x for x in blob if len(x) >= 6 and len(x) <= 8]
 level3 = [x for x in blob if len(x) >= 8 and len(x) <= 20]
 level0 = [x for x in blob if len(x) < 4]
@@ -10,27 +10,19 @@ guessed = []
 wrongGuesses = 8
 
 
-def getInput(difficulty=input("Choose difficulty (1, 2, or 3): ")):
-    while True:
-        if difficulty in ['1', '2', '3', '0']:
-            if difficulty == '1':
-                word = random.choice(level1)
-            elif difficulty == '2':
-                word = random.choice(level2)
-            elif difficulty == '3':
-                word = random.choice(level3)
-            elif difficulty == '0':
-                word = random.choice(level0)
-            return word
-        else:
-            difficulty = input("Please choose between only 1, 2, and 3: ")
-
-
 def selectDifficulty():
     global guessed
     global word
     guessed = []
-    word = getInput()
+    difficulty = input(
+        "Choose difficulty... 1 (for easy), 2 (for medium), or 3 (for hard): ")
+
+    while True:
+        if difficulty in ['1', '2', '3', '0']:
+            word = random.choice(eval('level' + difficulty))
+            break
+        else:
+            difficulty = input("Please choose between only 1, 2, and 3: ")
 
     # print(f"(Word: {word})")
     print(f"Your word has {len(word)} letters in it. Good luck!")
@@ -38,6 +30,7 @@ def selectDifficulty():
 
 
 def guessLetter(word):
+    # print(f"(Word: {word})")
     global wrongGuesses
     if wrongGuesses == 0 or not '_' in letterOrDash(word):
         playAgain(word)
@@ -55,7 +48,7 @@ def guessLetter(word):
             guessedWrong()
             displayWord(word)
             print(
-                f"Sorry, '{guess}' wasn't in the word. You've got {wrongGuesses} left, make 'em count!")
+                f"Sorry, '{guess}' wasn't in the word. You've got {wrongGuesses} guesses left, make 'em count!")
             guessLetter(word)
         else:
             displayWord(word)
@@ -88,7 +81,8 @@ def letterOrDash(word):
 
 def displayWord(word):
     os.system('clear')
-    print(f"So far: {letterOrDash(word)}")
+    print(
+        f"So far, you've got {letterOrDash(word)} and have guessed {', '.join(x for x in guessed)}")
 
 
 def playGame(wrongGuesses, word):
@@ -110,7 +104,8 @@ def playAgain(word):
     again = input("Y/N --> ").upper()
     if again == 'Y':
         wrongGuesses = 8
-        playGame(wrongGuesses, selectDifficulty())
+        nW = selectDifficulty()
+        playGame(wrongGuesses, nW)
     else:
         print("See ya later sk8r")
         exit()
