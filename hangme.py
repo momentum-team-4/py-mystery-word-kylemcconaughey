@@ -1,5 +1,6 @@
 import random
 import os
+from hanged import hanged
 with open('words.txt') as infile:
     blob = infile.read().upper().split()
 level1 = [x for x in blob if len(x) >= 3 and len(x) <= 5]
@@ -30,7 +31,7 @@ def selectDifficulty():
 
 
 def guessLetter(word):
-    # print(f"(Word: {word})")
+    print(f"(Word: {word})")
     global wrongGuesses
     if wrongGuesses == 0 or not '_' in letterOrDash(word):
         playAgain(word)
@@ -83,6 +84,8 @@ def displayWord(word):
     os.system('clear')
     print(
         f"So far, you've got {letterOrDash(word)} and have guessed {', '.join(x for x in guessed)}")
+    global wrongGuesses
+    hanged(wrongGuesses)
 
 
 def playGame(wrongGuesses, word):
