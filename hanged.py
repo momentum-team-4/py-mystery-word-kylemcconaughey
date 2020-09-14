@@ -1,7 +1,7 @@
 def hanged(num):
     if num == 7:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("            |")
         print("            |")
         print("            |")
@@ -11,7 +11,7 @@ def hanged(num):
         print(" |              |")
     elif num == 6:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("            |")
         print("            |")
@@ -21,7 +21,7 @@ def hanged(num):
         print(" |              |")
     elif num == 5:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("    |       |")
         print("            |")
@@ -31,7 +31,7 @@ def hanged(num):
         print(" |              |")
     elif num == 4:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("    |       |")
         print("    |       |")
@@ -41,7 +41,7 @@ def hanged(num):
         print(" |              |")
     elif num == 3:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("   /|       |")
         print("    |       |")
@@ -51,7 +51,7 @@ def hanged(num):
         print(" |              |")
     elif num == 2:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("   /|\      |")
         print("    |       |")
@@ -61,7 +61,7 @@ def hanged(num):
         print(" |              |")
     elif num == 1:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("   /|\      |")
         print("    |       |")
@@ -71,7 +71,7 @@ def hanged(num):
         print(" |              |")
     elif num == 0:
         print("    ________|")
-        print("    |     \\|")
+        print("    |      \\|")
         print("    O       |")
         print("   /|\      |")
         print("    |       |")
