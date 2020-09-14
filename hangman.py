@@ -1,6 +1,6 @@
 import random
 import os
-
+file = open('words.txt')
 wrongGuessCount = 8
 
 alreadyGuessed = []
@@ -10,7 +10,8 @@ word = ''
 
 
 def hangman(file):
-    randomWord()
+    word = randomWord()
+    print(word)
     guessLetter()
 
 
@@ -29,8 +30,9 @@ def playAgain():
 # def open words.txt, read them into blob
 # def select random word - must take difficulty input
 def randomWord(difficulty=int(input('Enter the difficulty you would like... 1, 2, or 3: '))):
-    with open(file, 'rt') as infile:
-        blob = infile.read()
+    # with open(file, 'rt') as infile:
+    #     blob = infile.read()
+    blob = file.read()
 
     if difficulty == 1:
         minLength = 4
@@ -160,17 +162,4 @@ def checkIfWonOrLost():
         #
         #
 if __name__ == "__main__":
-    import argparse
-    from pathlib import Path
-
-    parser = argparse.ArgumentParser(
-        description='Hangman!')
-    parser.add_argument('file', help='file to read')
-    args = parser.parse_args()
-
-    file = Path(args.file)
-    if file.is_file():
-        hangman(file)
-    else:
-        print(f"{file} does not exist!")
-        exit(1)
+    hangman(file)
