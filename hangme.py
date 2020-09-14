@@ -5,19 +5,22 @@ with open('words.txt') as infile:
 level1 = [x for x in blob if len(x) >= 4 and len(x) <= 6]
 level2 = [x for x in blob if len(x) >= 6 and len(x) <= 8]
 level3 = [x for x in blob if len(x) >= 8 and len(x) <= 20]
+level0 = [x for x in blob if len(x) < 4]
 guessed = []
 wrongGuesses = 8
 
 
 def getInput(difficulty=input("Choose difficulty (1, 2, or 3): ")):
     while True:
-        if difficulty in ['1', '2', '3']:
+        if difficulty in ['1', '2', '3', '0']:
             if difficulty == '1':
                 word = random.choice(level1)
             elif difficulty == '2':
                 word = random.choice(level2)
             elif difficulty == '3':
                 word = random.choice(level3)
+            elif difficulty == '0':
+                word = random.choice(level0)
             return word
         else:
             difficulty = input("Please choose between only 1, 2, and 3: ")
@@ -28,13 +31,8 @@ def selectDifficulty():
     global word
     guessed = []
     word = getInput()
-    # if difficulty == '1':
-    #     word = random.choice(level1)
-    # elif difficulty == '2':
-    #     word = random.choice(level2)
-    # elif difficulty == '3':
-    #     word = random.choice(level3)
 
+    # print(f"(Word: {word})")
     print(f"Your word has {len(word)} letters in it. Good luck!")
     return word
 
@@ -79,7 +77,6 @@ def guessedWrong():
 
 
 def letterOrDash(word):
-    print(f"(Word: {word})")
     soFar = ''
     for i in range(len(word)):
         if word[i] in guessed:
