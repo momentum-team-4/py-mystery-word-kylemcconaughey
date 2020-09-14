@@ -1,4 +1,4 @@
-def hanged(num):
+def drawn(num):
     if num == 7:
         print("    ________|")
         print("    |      \\|")

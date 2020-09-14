@@ -1,8 +1,8 @@
-# TO PLAY, PLEASE ENSURE YOU'RE IN THIS DIRECTORY IN COMMAND LINE, AND ENTER 'python3 hangme.py'
+# TO PLAY, PLEASE ENSURE YOU'RE IN THIS DIRECTORY IN COMMAND LINE, AND ENTER 'python3 mystery.py'
 import math
 import random
 import os
-from hanged import hanged
+from drawing import drawn
 with open('words.txt', 'rt') as infile:
     blob = infile.read().upper().split()
 level1 = [x for x in blob if len(x) >= 3 and len(x) <= 5]
@@ -105,7 +105,7 @@ def playAgain(word):
     if wrongGuesses == 0:
         print(f"Sorry, the word was {word}, play again?")
     elif not '_' in letterOrDash(word):
-        print("Congrats! Play again?")
+        print(f"Congrats! You figured out it was '{word}' ---- Play again?")
     again = input("Y/N --> ").upper()
     if again == 'Y':
         wrongGuesses = 8
