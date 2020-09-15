@@ -33,7 +33,7 @@ def selectDifficulty():
 
 
 def guessLetter(word):
-    print(f"(Word: {word})")
+    # print(f"(Word: {word})")
     global wrongGuesses
     if wrongGuesses == 0 or not '_' in letterOrDash(word):
         playAgain(word)
