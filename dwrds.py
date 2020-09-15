@@ -90,7 +90,7 @@ def biggestFamily(guess):
     for ls in bigFam:
         if len(ls) == len(bf):
             for el in ls:
-                if guess not in ls[el]:
+                if guess not in el:
                     bf = ls
         elif len(ls) > len(bf):
             bf = ls
