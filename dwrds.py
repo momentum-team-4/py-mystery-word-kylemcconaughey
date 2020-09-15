@@ -35,7 +35,9 @@ def initialWords(num=getWordLength()):
 
 
 def guessLetter():
-    displayState()
+    global display
+    print(f"Display: {display}")
+    # displayState()
     global guessed
     if not '_' in letterOrDash():
         playAgain()
@@ -58,21 +60,24 @@ def pareWords(guess):
     newList = biggestFamily(guess)
     possWords = newList
     print(possWords)
+    displayState()
     guessLetter()
 
 
 def displayState():
-    # os.system('clear')
+
     letterOrDash()
     if not '_' in letterOrDash():
         print("Congrats")
         playAgain()
     else:
         print(
-            f"You have guessed these letters: {printGuessed()}. You've guessed {len(guessed)} times. Guess again!")
+            f"You have guessed | {printGuessed()} | You've guessed {len(guessed)} times. Guess again!")
+        print(f"So far: {letterOrDash()}")
 
 
 def biggestFamily(guess):
+    os.system('clear')
     global display
     bigFam = []
     global possWords
@@ -80,17 +85,27 @@ def biggestFamily(guess):
         if display[el] == None:
             bigFam.append([x for x in possWords if x[el] == guess])
     bigFam.append([x for x in possWords if guess not in x])
-    newFam = max(bigFam)
+    print(f"bigFam: {bigFam}")
+    bf = []
+    for ls in bigFam:
+        if len(ls) == len(bf):
+            for el in ls:
+                if guess not in ls[el]:
+                    bf = ls
+        elif len(ls) > len(bf):
+            bf = ls
+    print(f"biggestFamily: {bf}")
+    print(f"Guessed letter: {guess}")
     for el in range(finalLength):
-        if newFam[0][el] == guess:
+        if bf[0][el] == guess:
             display[el] = guess
-    return newFam
+    return bf
 
 
 def printGuessed():
     result = ''
     for i in range(len(guessed)):
-        result += guessed[i] + ', '
+        result += guessed[i] + ' '
     return result
 
 
